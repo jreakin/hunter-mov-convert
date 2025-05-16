@@ -26,7 +26,7 @@ class MovieFolder:
         _mov_files = self.folder_path.glob('*.mov')
         for _mov_file in tqdm(_mov_files, desc='Converting MOV files to MP4'):
             self.convert_mov_to_mp4(_mov_file)
-        print(f'Converted {len(_mov_files)} MOV files to MP4')
+        print(f'Converted {len(list(self.mp4_folder_path.glob("*.mp4")))} MOV files to MP4')
 
 
 def main():
