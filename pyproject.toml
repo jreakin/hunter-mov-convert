@@ -1,0 +1,20 @@
+[project]
+name = "hunter-mov-convert"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "jreakin", email = "johnreakin@gmail.com" }
+]
+requires-python = ">=3.12.8"
+dependencies = [
+    "moviepy>=2.1.2",
+    "tqdm>=4.67.1",
+]
+
+[project.scripts]
+hunter-mov-convert = "hunter_mov_convert:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
