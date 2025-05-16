@@ -16,11 +16,41 @@ class MovieFolder:
             print(f'{_mov_path} is not a MOV file, skipping...')
             return
         _mp4_path = self.mp4_folder_path / _mov_path.name
-        try:
-            clip = VideoFileClip(_mov_path)
-            clip.write_videofile(_mp4_path, codec='libx264')
-        except Exception as e:
-            print(f'Error converting {_mov_path} to MP4: {e}')
+        
+        # Try different codec configurations
+        codec_configs = [
+            {
+                'codec': 'libx264',
+                'audio_codec': 'aac',
+                'bitrate': '5000k',
+                'preset': 'medium',
+                'threads': 4,
+                'ffmpeg_params': ['-crf', '23']
+            },
+            {
+                'codec': 'mpeg4',
+                'audio_codec': 'aac',
+                'bitrate': '5000k'
+            },
+            {
+                'codec': 'libx264',
+                'audio_codec': 'aac',
+                'bitrate': '5000k'
+            }
+        ]
+
+        for config in codec_configs:
+            try:
+                print(f"\nTrying to convert {_mov_path.name} with codec: {config['codec']}")
+                clip = VideoFileClip(_mov_path)
+                clip.write_videofile(_mp4_path, **config)
+                print(f"Successfully converted {_mov_path.name} using {config['codec']}")
+                return
+            except Exception as e:
+                print(f"Failed to convert with {config['codec']}: {str(e)}")
+                continue
+        
+        print(f"Failed to convert {_mov_path.name} with any codec configuration")
 
     def read_folder(self):
         _mov_files = self.folder_path.glob('*.mov')
