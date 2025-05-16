@@ -119,6 +119,25 @@ The tool will:
 2. Convert all MOV files in the input folder to MP4 format
 3. Save the converted files in the `mp4` subfolder
 
+## Updating the Repository
+
+If you've cloned the repository and want to get the latest updates:
+
+1. Navigate to the repository directory:
+   ```bash
+   cd hunter-mov-convert
+   ```
+
+2. Fetch and pull the latest changes:
+   ```bash
+   git pull origin main
+   ```
+
+3. Reinstall the package to get the updates:
+   ```bash
+   uv pip install .
+   ```
+
 ## Requirements
 
 - Python 3.8 or higher

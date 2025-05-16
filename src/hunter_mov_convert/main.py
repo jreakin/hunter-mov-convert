@@ -16,8 +16,11 @@ class MovieFolder:
             print(f'{_mov_path} is not a MOV file, skipping...')
             return
         _mp4_path = self.mp4_folder_path / _mov_path.name
-        clip = VideoFileClip(_mov_path)
-        clip.write_videofile(_mp4_path, codec='libx264')
+        try:
+            clip = VideoFileClip(_mov_path)
+            clip.write_videofile(_mp4_path, codec='libx264')
+        except Exception as e:
+            print(f'Error converting {_mov_path} to MP4: {e}')
 
     def read_folder(self):
         _mov_files = self.folder_path.glob('*.mov')
