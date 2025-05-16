@@ -19,6 +19,7 @@ class MovieFolder:
         
         # Try different codec configurations
         codec_configs = [
+            # High quality H.264
             {
                 'codec': 'libx264',
                 'audio_codec': 'aac',
@@ -27,15 +28,52 @@ class MovieFolder:
                 'threads': 4,
                 'ffmpeg_params': ['-crf', '23']
             },
+            # Basic H.264
+            {
+                'codec': 'libx264',
+                'audio_codec': 'aac',
+                'bitrate': '5000k'
+            },
+            # MPEG4 with high quality
+            {
+                'codec': 'mpeg4',
+                'audio_codec': 'aac',
+                'bitrate': '5000k',
+                'qscale': 2
+            },
+            # Basic MPEG4
             {
                 'codec': 'mpeg4',
                 'audio_codec': 'aac',
                 'bitrate': '5000k'
             },
+            # H.264 with different preset
             {
                 'codec': 'libx264',
                 'audio_codec': 'aac',
-                'bitrate': '5000k'
+                'bitrate': '5000k',
+                'preset': 'fast'
+            },
+            # H.264 with lower quality but better compatibility
+            {
+                'codec': 'libx264',
+                'audio_codec': 'aac',
+                'bitrate': '3000k',
+                'preset': 'fast',
+                'ffmpeg_params': ['-crf', '28']
+            },
+            # MPEG4 with lower quality
+            {
+                'codec': 'mpeg4',
+                'audio_codec': 'aac',
+                'bitrate': '3000k',
+                'qscale': 5
+            },
+            # Last resort - very basic settings
+            {
+                'codec': 'mpeg4',
+                'audio_codec': 'aac',
+                'bitrate': '2000k'
             }
         ]
 
